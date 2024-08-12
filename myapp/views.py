@@ -6,9 +6,9 @@ from django.db.models import Sum
 
 
 def index(request):
-  author = Books.objects.all().filter(author__popularity_score__gte = 7).aggregate(total_price = Sum('price'))
+  author = Books.objects.all().filter(author__firstname__contains='a').values_list('title', flat=True)
   print(author)
   res = ''
-  for i,j in author.items():
-    res += f'<h3>{i}: {j}</h3>'
+  for i in author:
+    res += f'<h3>{i}</h3>'
   return HttpResponse(res)
