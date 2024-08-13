@@ -6,8 +6,12 @@ from django.db.models import Sum,Q
 
 
 def index(request):
-  author = Author.objects.all()[:10]
+  author = Author.objects.all().filter(popularity_score__gte = 50)
+  author1 = author.first()
+  author2 = author.last()
   print(author)
+  print(author1)
+  print(author2)
   res = ''
   for i in author:
     res += f'<h3>{i}</h3>'
