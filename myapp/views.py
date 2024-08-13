@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Author, Books, Publisher, User
-from django.db.models import Sum,Q
+from django.db.models import Sum, Q, Min
 
 
 
 def index(request):
-  author = Author.objects.all().exclude(joindate__year__gte = 2050)
+  author = Author.objects.all().aggregate(Min('joindate'))
   print(author)
   res = ''
-  for i in author:
-    res += f'<h3>{i}</h3>'
+  for i,j in author.items():
+    res += f'<h3>{i}: {j}</h3>'
   return HttpResponse(res)
