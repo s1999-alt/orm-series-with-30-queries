@@ -6,7 +6,8 @@ from django.db.models import Sum
 
 
 def index(request):
-  author = Author.objects.all().filter(books__publisher__pk=1)
+  author = Author.objects.all().filter(books__title__icontains='le')
+  print(author)
   res = ''
   for i in author:
     res += f'<h3>{i}</h3>'
