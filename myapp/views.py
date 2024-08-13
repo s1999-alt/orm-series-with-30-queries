@@ -6,7 +6,7 @@ from django.db.models import Sum,Q
 
 
 def index(request):
-  author = Author.objects.filter(Q(firstname__istartswith='a') and (Q(popularity_score__gte=5) or Q(joindate__year__gt=2014)))
+  author = Author.objects.all()[:10]
   print(author)
   res = ''
   for i in author:
