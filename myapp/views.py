@@ -6,7 +6,7 @@ from django.db.models import Sum, Q, Min, Max
 
 
 def index(request):
-  author = Books.objects.all().filter(author__pk=1).aggregate(Sum('price'))
+  author = Books.objects.all().order_by('published_date').last().title
   print(author)
   res = ''
   for i in author:
